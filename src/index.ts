@@ -2,7 +2,6 @@
 
 import * as util from "util";
 
-
 const matchAny = [/:[0-9]/];
 
 const notMatchAny = [
@@ -13,17 +12,17 @@ const notMatchAny = [
 ];
 
 export const settings = {
-    fullTrace: false,
-    excludeNodeModules: false
+  fullTrace: false,
+  excludeNodeModules: false
 };
 
-export const getUsefulStack = function (e: Error) {
+export const getUsefulStack = function (e: any, color?: string) {
   
   let err = (e && e.stack || e) as string;
   
   if (typeof err !== 'string') {
     // breakLength => keep everything on one line
-    err = util.inspect(err, {breakLength: Infinity});
+    return util.inspect(err, {breakLength: Infinity});
   }
   
   return String(err).split('\n')
@@ -41,7 +40,5 @@ export const getUsefulStack = function (e: Error) {
   })
   .join('\n')
 };
-
-
 
 export const getCleanTrace = getUsefulStack;
