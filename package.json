@@ -1,11 +1,8 @@
 {
   "name": "clean-trace",
-  "version": "0.0.102",
+  "version": "0.0.103",
   "description": "Semver-oriented TypeScript library skeleton.",
   "main": "dist/index.js",
-  "bin": {
-    "xxx-TODO-clean-trace": "dist/cli.js"
-  },
   "types": "dist/index.d.ts",
   "typings": "dist/index.d.ts",
   "scripts": {
