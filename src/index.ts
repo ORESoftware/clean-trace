@@ -18,7 +18,7 @@ export const settings = {
 
 export const getUsefulStack = function (e: any, color?: string) {
   
-  let err = (e && e.stack || e) as string;
+  let err = (e && e.stack || e);
   
   if (typeof err !== 'string') {
     // breakLength => keep everything on one line

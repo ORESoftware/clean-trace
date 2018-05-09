@@ -23,4 +23,7 @@ suman.conf.js
 *.md
 *.json
 *.DS_Store
+*.tgz
+*.txt
+
 
