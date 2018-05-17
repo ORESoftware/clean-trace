@@ -8,7 +8,13 @@ const notMatchAny = [
   /bootstrap_node\.js/,
   /Function\.Module\.runMain/,
   /process\._tickCallback/,
-  /at Module\._compile/
+  /at Module\._compile/,
+  /at emitCloseNT/,
+  /internal\/process\/next_tick\.js/,
+  /process\._tickCallback/,
+  /at Function\.Module\._load/,
+  /at Module\.require/,
+  /at Object\.Module\._extensions./
 ];
 
 export const settings = {
@@ -29,20 +35,29 @@ export const getUsefulStack = function (e: any, color?: string) {
     return util.inspect(err, {breakLength: Infinity});
   }
   
+  if (settings.fullTrace) {
+    return err;
+  }
+  
   return String(err).split('\n')
-  .filter(function (v, i) {
-    if (i < 2) return true;
-    return matchAny.some(function (r) {
-      return r.test(v);
+    .map(v => String(v).trim())
+    .filter(function (v, i) {
+      if (v) {
+        if (i < 2) return true;
+        return matchAny.some(function (r) {
+          return r.test(v);
+        });
+      }
     })
-  })
-  .filter(function (v, i) {
-    if (i < 2) return true;
-    return !notMatchAny.some(function (r) {
-      return r.test(v);
-    });
-  })
-  .join('\n')
+    .filter(function (v, i) {
+      if (v) {
+        if (i < 2) return true;
+        return !notMatchAny.some(function (r) {
+          return r.test(v);
+        });
+      }
+    })
+    .join('\n')
 };
 
 export const getCleanTrace = getUsefulStack;
